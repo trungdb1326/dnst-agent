@@ -38,16 +38,20 @@ def call_model(messages, temperature=0, max_tokens=1500) -> str:
             "Chưa cấu hình model. Set LLM_BASE_URL / LLM_API_KEY / LLM_MODEL "
             "(Claude Code wiring sang model AgentBase khi deploy)."
         )
+    # Qwen3 dùng thinking mode mặc định (~2000 completion tokens cho reasoning).
+    # Cần ít nhất 4096 để đảm bảo có đủ room cho cả reasoning lẫn content thực.
+    effective_max_tokens = max(max_tokens, 4096)
     r = httpx.post(
         base.rstrip("/") + "/chat/completions",
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
         json={"model": model, "messages": messages,
-              "temperature": temperature, "max_tokens": max_tokens},
-        timeout=60,
+              "temperature": temperature, "max_tokens": effective_max_tokens},
+        timeout=120,
     )
     r.raise_for_status()
     data = r.json()
-    return data["choices"][0]["message"]["content"]
+    msg = data["choices"][0]["message"]
+    return msg.get("content") or msg.get("reasoning") or ""
 
 @app.post("/api/ai")
 async def api_ai(req: Request):
