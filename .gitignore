@@ -1,0 +1,39 @@
+# Secrets & credentials — NEVER commit these
+.env
+.env.*
+.greennode.json
+.claude/settings.local.json
+*.key
+*.pem
+*.p12
+*.pfx
+*credentials*.json
+*secret*.json
+*secrets*.json
+*token*.json
+
+# AgentBase runtime cache & temp files
+.agentbase/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
