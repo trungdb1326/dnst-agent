@@ -244,9 +244,13 @@ footer.brandmark b{color:var(--ink);font-weight:700}
       <div class="tplpick"><label class="lbl" style="margin:0">Mẫu áp dụng:</label><select id="tplPick1"></select></div>
       <p class="sub">Bật công tắc ở trường muốn đổi, nhập giá trị mới. Giá trị này áp dụng cho <b>tất cả file</b> (bước sau vẫn sửa riêng từng file được).</p>
       <div class="aifill" style="margin:4px 0 16px;padding:14px 16px;border:1px solid #cdeede;background:#f1fbf6;border-radius:12px">
-        <button class="btn" id="aiFillBtn" style="background:linear-gradient(135deg,#00C26F,#00A65E);color:#fff;border:0">🤖 AI đọc &amp; điền tự động</button>
-        <span id="aiFillStatus" class="sub" style="display:inline-block;margin-left:10px"></span>
-        <div class="sub" style="margin-top:8px;color:var(--ink-soft)">AI (GreenNode) đọc nội dung từng file và tự điền các giá trị đang có — bạn chỉ cần kiểm lại. Hữu ích khi tool không tự nhận diện được.</div>
+        <div class="sub" style="font-weight:600;color:var(--ink);margin-bottom:6px;font-size:14px">🤖 Sửa hàng loạt bằng câu lệnh tiếng Việt</div>
+        <textarea id="aiCmd" rows="3" style="width:100%;box-sizing:border-box;padding:9px 11px;border:1px solid #cdeede;border-radius:9px;font-family:inherit;font-size:14px;resize:vertical" placeholder="VD: Đổi tên thụ hưởng thành CÔNG TY TNHH ABC cho tất cả file; riêng file của Sacombank đổi số tài khoản thành 0123456789; file PB1801 giữ nguyên."></textarea>
+        <div style="margin-top:10px">
+          <button class="btn" id="aiApplyBtn" style="background:linear-gradient(135deg,#00C26F,#00A65E);color:#fff;border:0">🤖 AI áp dụng thay đổi</button>
+          <span id="aiFillStatus" class="sub" style="display:inline-block;margin-left:10px"></span>
+        </div>
+        <div class="sub" style="margin-top:8px;color:var(--ink-soft)">AI đọc câu lệnh + nội dung từng file rồi điền giá trị mới vào đúng file (hiểu cả điều kiện như “file của Sacombank”). Xem lại ở bước 3 trước khi xuất.</div>
       </div>
       <div id="fieldBox"></div>
 
@@ -560,43 +564,61 @@ $('#addRule').onclick=()=>{ rules.push({find:'',replace:''}); renderRules(); };
 /* ---- AI đọc & điền (GreenNode qua proxy /api/ai) ---- */
 const AI_ENDPOINT='/api/ai';
 function aiStatus(m){ const el=$('#aiFillStatus'); if(el) el.textContent=m||''; }
-async function aiExtractOne(file){
-  const docText=file.rows.map(r=>r.text).join('\n').slice(0,8000);
-  const fields=getFields();
+async function aiBuildPlan(cmd, okFiles, fields){
   const fieldList=fields.map(d=>'- "'+d.key+'": '+d.name).join('\n');
-  const sys='Bạn là trợ lý trích xuất thông tin từ chứng từ "Đề nghị thanh toán" tiếng Việt. '
-    +'Chỉ trả về MỘT object JSON duy nhất, không giải thích, không dùng markdown. '
-    +'Khoá là mã trường, giá trị là chuỗi lấy đúng từ văn bản; nếu không tìm thấy thì để chuỗi rỗng.';
-  const user='Các trường cần lấy:\n'+fieldList+'\n\nNội dung chứng từ:\n"""\n'+docText+'\n"""\n\n'
-    +'Trả về JSON với đúng các khoá: '+fields.map(d=>d.key).join(', ')+'.';
+  const fileList=okFiles.map((f,idx)=>{
+    const text=f.rows.map(r=>r.text).join('\n').slice(0,1400);
+    return '### file id="f'+idx+'" tên="'+f.name+'"\n'+text;
+  }).join('\n\n');
+  const sys='Bạn là trợ lý sửa hàng loạt chứng từ "Đề nghị thanh toán" tiếng Việt. '
+    +'Người dùng đưa một CÂU LỆNH mô tả thay đổi và danh sách FILE (mỗi file có id, tên, nội dung). '
+    +'Với mỗi file, xác định những TRƯỜNG cần đổi và GIÁ TRỊ MỚI theo đúng câu lệnh, '
+    +'chú ý điều kiện theo tên/nội dung file (ví dụ "file của Sacombank", "file PB1801"). '
+    +'Chỉ trả về MỘT object JSON: { "<file_id>": { "<field_key>": "<giá trị mới>" } }. '
+    +'Chỉ gồm file và trường thực sự bị câu lệnh tác động; cái nào không đụng tới thì bỏ qua hẳn. '
+    +'Giá trị là chuỗi đúng định dạng cần ghi vào chứng từ. Không giải thích, không markdown.';
+  const user='CÁC TRƯỜNG có thể sửa (key: tên):\n'+fieldList
+    +'\n\nCÂU LỆNH của người dùng:\n"""\n'+cmd+'\n"""\n\n'
+    +'DANH SÁCH FILE:\n'+fileList
+    +'\n\nTrả về JSON đúng định dạng, dùng đúng file_id (f0, f1, …) và field_key trong: '+fields.map(d=>d.key).join(', ')+'.';
   const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:0,max_tokens:1500})});
+    body:JSON.stringify({messages:[{role:'system',content:sys},{role:'user',content:user}],temperature:0,max_tokens:2000})});
   const d=await r.json();
-  if(!r.ok||!d.content) throw new Error((d&&(d.error||'AI không trả về nội dung'))||'Lỗi AI');
+  if(!r.ok||!d.content) throw new Error((d&&d.error)||'AI không trả về nội dung');
   const txt=d.content, a=txt.indexOf('{'), b=txt.lastIndexOf('}');
   if(a<0||b<0) throw new Error('Không tìm thấy JSON trong phản hồi AI');
   return JSON.parse(txt.slice(a,b+1));
 }
-async function aiFillDetected(){
-  const btn=$('#aiFillBtn');
+async function aiApplyChanges(){
+  const cmd=($('#aiCmd').value||'').trim();
+  if(!cmd){ toast('Hãy mô tả thay đổi bạn muốn (tiếng Việt).'); return; }
   const ok=files.filter(f=>f.status==='ok'&&f.rows&&f.rows.length);
   if(!ok.length){ toast('Chưa có file đọc được nội dung.'); return; }
-  btn.disabled=true; let done=0, fail=0;
-  for(const f of ok){
-    aiStatus('AI đang đọc: '+f.name+' ('+(done+fail+1)+'/'+ok.length+')…');
-    try{
-      const obj=await aiExtractOne(f);
-      getFields().forEach(d=>{ const v=obj[d.key]; if(v!=null&&String(v).trim()!=='') f.detected[d.key]=disp(String(v)); });
-      done++;
-    }catch(e){ console.error('AI fill error:',f.name,e); fail++; }
-  }
-  btn.disabled=false;
-  aiStatus('Xong: đã điền '+done+'/'+ok.length+' file'+(fail?(' · '+fail+' lỗi'):'')+'.');
-  buildStep2();
-  if(!$('#step3').classList.contains('hidden')) buildStep3();
-  toast('AI đã đọc xong '+done+'/'+ok.length+' file.');
+  const fields=getFields();
+  const btn=$('#aiApplyBtn'); btn.disabled=true;
+  aiStatus('AI đang phân tích lệnh & đọc file…');
+  try{
+    const plan=await aiBuildPlan(cmd, ok, fields);
+    let nChange=0, nFile=0;
+    ok.forEach((f,idx)=>{
+      const edits=plan['f'+idx];
+      if(edits&&typeof edits==='object'){
+        let any=false;
+        fields.forEach(d=>{ const v=edits[d.key]; if(v!=null&&String(v).trim()!==''){ f.override[d.key]=disp(String(v)); nChange++; any=true; } });
+        if(any) nFile++;
+      }
+    });
+    aiStatus('Xong: áp dụng '+nChange+' thay đổi trên '+nFile+'/'+ok.length+' file.');
+    buildStep2();
+    if(!$('#step3').classList.contains('hidden')) buildStep3();
+    toast(nFile?('AI đã áp dụng cho '+nFile+' file — kiểm lại ở bước 3 trước khi xuất.'):'AI không tìm thấy thay đổi nào khớp câu lệnh.');
+  }catch(e){
+    console.error('AI apply error:',e);
+    aiStatus('Lỗi: '+(e.message||e));
+    toast('Lỗi AI: '+(e.message||e));
+  }finally{ btn.disabled=false; }
 }
-(function(){ const b=$('#aiFillBtn'); if(b) b.onclick=aiFillDetected; })();
+(function(){ const b=$('#aiApplyBtn'); if(b) b.onclick=aiApplyChanges; })();
 
 /* ---- Logic giá trị ---- */
 function valueFor(file,key){

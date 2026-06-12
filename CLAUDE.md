@@ -12,19 +12,26 @@ chuyển sang Word rồi sửa tay từng cái. Người dùng tải nhiều PDF
 - Trường cần thay đổi và giá trị mới (đổi chung cho tất cả, hoặc sửa riêng từng file).
 
 ## 🧠 Vai trò của AI
-Tool xử lý PDF hoàn toàn ở client. AI chỉ làm **một việc**: khi bấm
-"🤖 AI đọc & điền tự động", tool gửi nội dung text từng chứng từ tới `POST /api/ai`
-và yêu cầu AI **trích GIÁ TRỊ HIỆN TẠI của từng trường** (mã, ngày, số tiền, tên NCC…)
-trả về dưới dạng **một object JSON** (khóa = mã trường, giá trị = chuỗi lấy đúng từ văn bản).
-Tool dùng kết quả này điền sẵn cột "giá trị hiện tại" để người dùng so & thay.
+Tool xử lý PDF hoàn toàn ở client. AI đảm nhận **hai chế độ**, đều qua `POST /api/ai`:
+
+**Chế độ 1 — "AI đọc & điền tự động"**
+Tool gửi nội dung text từng chứng từ và yêu cầu AI **trích GIÁ TRỊ HIỆN TẠI** của từng
+trường (mã, ngày, số tiền, tên NCC…), trả về một object JSON (khóa = mã trường, giá trị =
+chuỗi lấy đúng từ văn bản). Tool điền sẵn cột "giá trị hiện tại" để người dùng so & thay.
+
+**Chế độ 2 — "Sửa hàng loạt bằng câu lệnh tiếng Việt"**
+Người dùng nhập câu lệnh tự nhiên (vd: *"đổi tên NCC của file Sacombank thành Công ty XYZ"*).
+Tool gửi câu lệnh + nội dung từng file tới AI; AI xác định file nào bị tác động, trường nào
+cần đổi và giá trị mới là gì — trả về JSON dạng `{filename: {field: newValue}}`. Tool áp
+dụng kết quả ngay, người dùng xem lại ở bước 3 trước khi xuất.
 
 ## 📤 Output
 - Các file PDF đã sửa, tải về hàng loạt (zip), hoặc xuất kèm bản Word.
 
 ## 🚫 Rule cứng (đã nhúng trong prompt của tool)
-- AI chỉ **trích đúng** giá trị có trong văn bản; không tìm thấy thì trả chuỗi rỗng.
-- Chỉ trả về **một object JSON duy nhất**, không giải thích, không markdown.
-- AI **không** tự quyết định giá trị mới — việc đổi thành gì do người dùng nhập.
+- Chế độ 1: AI chỉ **trích đúng** giá trị có trong văn bản; không tìm thấy thì trả chuỗi rỗng.
+- Chế độ 2: AI chỉ tác động đúng file/trường khớp câu lệnh; file không liên quan bỏ qua hoàn toàn.
+- Cả hai chế độ: chỉ trả về **một object JSON duy nhất**, không giải thích, không markdown.
 
 ## ⚙️ Ghi chú kỹ thuật cho deploy (cho Claude Code)
 - Frontend gọi `POST /api/ai` với body `{messages:[...], temperature, max_tokens}` và

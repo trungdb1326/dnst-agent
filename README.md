@@ -1,8 +1,9 @@
 # Agent: Sửa hàng loạt PDF Đề Nghị Thanh Toán
 
 Tool sửa thông tin hàng loạt trên PDF "Đề nghị thanh toán" — xử lý PDF ngay trên trình
-duyệt (pdf.js + pdf-lib), xuất hàng loạt PDF/Word/zip. Có nút "AI đọc & điền tự động"
-để AI trích sẵn giá trị hiện tại của từng trường.
+duyệt (pdf.js + pdf-lib), xuất hàng loạt PDF/Word/zip. Hai chế độ AI:
+- **"AI đọc & điền tự động"** — trích giá trị hiện tại của từng trường từ văn bản PDF.
+- **"Sửa bằng câu lệnh tiếng Việt"** — nhập lệnh tự nhiên, AI hiểu và áp dụng đúng file/trường.
 
 ## Cấu trúc
 ```
