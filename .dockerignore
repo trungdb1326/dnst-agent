@@ -1,4 +1,4 @@
-# Secrets & credentials — NEVER commit these
+# Secrets & credentials — NEVER bake these into the image
 .env
 .env.*
 .greennode.json
@@ -12,10 +12,15 @@
 *secrets*.json
 *token*.json
 
-# AgentBase runtime cache & temp files
+# AgentBase skills/cache — not needed in the runtime image
 .agentbase/
+.claude/
 
-# Python
+# Git
+.git/
+.gitignore
+
+# Python caches
 __pycache__/
 *.py[cod]
 *.pyo
@@ -28,14 +33,10 @@ build/
 venv/
 env/
 
-# IDE
+# IDE / OS
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# OS
 .DS_Store
 Thumbs.db
-
-.claude/

@@ -22,8 +22,8 @@
 <style>
 :root{
   --ink:#1a2233; --ink-soft:#4a5570; --line:#e3e7ef; --line-strong:#cdd4e2;
-  --bg:#f4f6fb; --paper:#ffffff; --bg1:#eaf3ee; --bg2:#f4efe2; --dot:rgba(15,81,50,.05);
-  --brand:#0f5132; --brand-2:#157347; --accent:#b8862b;
+  --bg:#f4f9ff; --paper:#ffffff; --bg1:#e2efff; --bg2:#e3fbef; --dot:rgba(0,104,255,.06);
+  --brand:#0068ff; --brand-2:#00c16a; --accent:#00a86b;
   --danger:#b42318; --ok:#157347;
   --shadow:0 1px 2px rgba(20,30,50,.05), 0 12px 32px -16px rgba(20,30,50,.25);
 }
@@ -35,9 +35,7 @@ body{font-family:'Be Vietnam Pro',sans-serif; color:var(--ink);
   min-height:100vh; line-height:1.55;}
 .wrap{max-width:1080px; margin:0 auto; padding:32px 20px 80px}
 header.top{display:flex; align-items:center; justify-content:space-between; gap:16px 24px; margin-bottom:26px; flex-wrap:wrap}
-.logo{flex:0 0 auto; width:52px;height:52px;border-radius:14px;
-  background:linear-gradient(150deg,var(--brand),var(--brand-2)); color:#fff;
-  display:grid;place-items:center; font-weight:800; font-size:24px; box-shadow:var(--shadow)}
+.logo{flex:0 0 auto; height:42px; display:flex; align-items:center}
 .top h1{font-size:23px; margin:0 0 2px; font-weight:800; letter-spacing:-.4px}
 .top p{margin:0; color:var(--ink-soft); font-size:14px}
 .steps{display:flex; gap:8px; margin:0 0 24px; flex-wrap:wrap}
@@ -129,19 +127,8 @@ table.prev input.cell.changed{background:#fef6e3;border-color:#ecd9a6;font-weigh
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:radial-gradient(var(--dot) 1.1px, transparent 1.1px);background-size:22px 22px}
 .wrap{position:relative;z-index:1}
-body[data-theme="ocean"]{--brand:#0e6e8c;--brand-2:#0891b2;--accent:#0e7490;--bg1:#dcf0f7;--bg2:#e7fbff;--bg:#f1f7fb;--dot:rgba(14,110,140,.06)}
-body[data-theme="sunset"]{--brand:#b4451f;--brand-2:#c2410c;--accent:#e11d48;--bg1:#ffe5d6;--bg2:#fff1e6;--bg:#fdf6f2;--dot:rgba(180,69,31,.06)}
-body[data-theme="royal"]{--brand:#6d28d9;--brand-2:#7c3aed;--accent:#db2777;--bg1:#efe4fe;--bg2:#fbe7f3;--bg:#f8f5fd;--dot:rgba(109,40,217,.06)}
-body[data-theme="pink"]{--brand:#b03a6c;--brand-2:#cf6093;--accent:#db2777;--bg1:#ffe1ec;--bg2:#fff2f7;--bg:#fdf5f8;--dot:rgba(176,58,108,.06)}
-body[data-theme="graphite"]{--brand:#1f2937;--brand-2:#374151;--accent:#b8862b;--bg1:#e8ebef;--bg2:#efe9dc;--bg:#f3f4f6;--dot:rgba(31,41,55,.06)}
-body[data-theme="zalopay"]{--brand:#0068ff;--brand-2:#00c16a;--accent:#00a86b;--bg1:#e2efff;--bg2:#e3fbef;--bg:#f4f9ff;--dot:rgba(0,104,255,.06)}
 .brandbar{display:flex;align-items:center;gap:18px}
-.logo svg{width:30px;height:30px;display:block}
-.themepick{display:flex;align-items:center;gap:7px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 11px;box-shadow:var(--shadow)}
-.themepick .lbl2{font-size:11.5px;color:var(--ink-soft);font-weight:600;margin-right:2px}
-.swatch{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);transition:transform .15s}
-.swatch:hover{transform:scale(1.15)}
-.swatch.sel{box-shadow:0 0 0 2px var(--ink)}
+.logo img{height:42px;width:auto;display:block;object-fit:contain}
 footer.brandmark{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;gap:9px;color:var(--ink-soft);font-size:12.5px;letter-spacing:.2px}
 footer.brandmark .bm{width:22px;height:22px;border-radius:6px;flex:0 0 auto;
@@ -184,28 +171,17 @@ footer.brandmark b{color:var(--ink);font-weight:700}
 
   <header class="top">
     <div class="brandbar">
-      <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h5"/><path d="M9 17h5"/></svg></div>
+      <div class="logo"><img src="https://simg.zalopay.com.vn/zlp-website/assets/new_logo_6c5db2d21b.svg" alt="Zalopay" /></div>
       <div>
         <h1>Tool sửa hàng loạt file PDF</h1>
         <p>Sửa trực tiếp trên PDF gốc, giữ nguyên bố cục, chỉ thay phần thông tin bạn chọn.</p>
         <p style="margin-top:4px"><span style="display:inline-block;background:var(--paper);color:var(--brand);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700">Phiên bản 3.6 • Chọn tay</span></p>
       </div>
     </div>
-    <div class="themepick" id="themepick">
-      <span class="lbl2">Giao diện</span>
-      <span class="swatch" data-theme="zalopay"  title="ZaloPay"     style="background:linear-gradient(135deg,#0068ff,#00c16a)"></span>
-      <span class="swatch" data-theme="forest"   title="Rừng"        style="background:linear-gradient(135deg,#0f5132,#157347)"></span>
-      <span class="swatch" data-theme="ocean"    title="Đại dương"   style="background:linear-gradient(135deg,#0e6e8c,#0891b2)"></span>
-      <span class="swatch" data-theme="sunset"   title="Hoàng hôn"   style="background:linear-gradient(135deg,#b4451f,#e11d48)"></span>
-      <span class="swatch" data-theme="royal"    title="Tím"         style="background:linear-gradient(135deg,#6d28d9,#db2777)"></span>
-      <span class="swatch" data-theme="pink"     title="Hồng pastel" style="background:linear-gradient(135deg,#f9a8c9,#f472b6)"></span>
-      <span class="swatch" data-theme="graphite" title="Doanh nghiệp" style="background:linear-gradient(135deg,#1f2937,#374151)"></span>
-    </div>
   </header>
   <div class="tabbar">
     <button class="tabbtn active" data-tab="tab1">Đề Nghị Thanh Toán</button>
     <button class="tabbtn" data-tab="tab2">Biên bản đối soát</button>
-    <button class="tabbtn" data-tab="tab3">Mẫu</button>
     <button class="tabbtn" data-tab="tab4">Chọn tay</button>
   </div>
   <div id="tab1">
@@ -241,7 +217,6 @@ footer.brandmark b{color:var(--ink);font-weight:700}
   <section id="step2" class="hidden">
     <div class="card">
       <h2>Bước 2 — Chọn trường cần thay đổi</h2>
-      <div class="tplpick"><label class="lbl" style="margin:0">Mẫu áp dụng:</label><select id="tplPick1"></select></div>
       <p class="sub">Bật công tắc ở trường muốn đổi, nhập giá trị mới. Giá trị này áp dụng cho <b>tất cả file</b> (bước sau vẫn sửa riêng từng file được).</p>
       <div class="aifill" style="margin:4px 0 16px;padding:14px 16px;border:1px solid #cdeede;background:#f1fbf6;border-radius:12px">
         <div class="sub" style="font-weight:600;color:var(--ink);margin-bottom:6px;font-size:14px">🤖 Sửa hàng loạt bằng câu lệnh tiếng Việt</div>
@@ -305,7 +280,6 @@ footer.brandmark b{color:var(--ink);font-weight:700}
     <div class="card hidden" id="bbConfig">
       <h2>Đơn giá & xuất file</h2>
       <p class="sub">Nhập đơn giá áp dụng cho tất cả file; có thể sửa riêng từng file ở bảng dưới.</p>
-      <div class="tplpick"><label class="lbl" style="margin:0">Mẫu BBĐS:</label><select id="tplPick2"></select></div>
       <div class="bbcfg">
         <div><label class="lbl">Đơn giá (đồng / hóa đơn)</label><input class="txt" id="bbDonGia" inputmode="numeric" placeholder="vd: 1320"></div>
         <div><label class="lbl">Đơn giá đã/chưa gồm VAT</label>
@@ -325,30 +299,6 @@ footer.brandmark b{color:var(--ink);font-weight:700}
     </div>
   </div>
 
-    <div id="tab3" class="hidden">
-    <div class="card">
-      <h2>Quét mẫu mới</h2>
-      <p class="sub">Tải lên 1 file mẫu (PDF/Word). Tool quét cấu trúc và <b>ghi nhớ</b> để dùng lại. Lúc xử lý, bạn chọn mẫu là tool chỉnh theo đúng mẫu đó (ĐNTT nhớ bộ trường; BBĐS nhớ bản đồ cột & vị trí chèn Đơn giá). Mẫu lưu ngay trong trình duyệt, không cần mạng.</p>
-      <div class="drop" id="tpldrop"><div class="ico"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="6" width="22" height="29" rx="4" fill="var(--brand)" opacity=".13"/><rect x="9" y="6" width="22" height="29" rx="4" stroke="var(--brand)" stroke-width="2.4"/><path d="M14 14h12M14 20h12M14 26h7" stroke="var(--brand)" stroke-width="2" stroke-linecap="round"/><circle cx="33" cy="32" r="8" fill="#fff" stroke="var(--brand-2)" stroke-width="2.6"/><path d="M39 38l3.5 3.5" stroke="var(--brand-2)" stroke-width="2.6" stroke-linecap="round"/></svg></div><b>Kéo thả file mẫu vào đây</b><span>hoặc dùng nút bên dưới</span></div>
-      <input type="file" id="tplInput" accept=".pdf,.docx" class="hidden">
-      <div class="pickrow"><button class="linkbtn" id="tplPick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg> Chọn file mẫu</button></div>
-      <div id="tplScan" class="hidden">
-        <div class="bbcfg" style="margin-top:10px">
-          <div><label class="lbl">Tên mẫu</label><input class="txt" id="tplName" placeholder="vd: ĐNTT - EVN Khánh Hòa"></div>
-          <div><label class="lbl">Loại văn bản</label><div class="vatpick">
-            <label><input type="radio" name="tpltype" value="dntt"> Đề Nghị Thanh Toán</label>
-            <label><input type="radio" name="tpltype" value="bbds"> Biên bản đối soát</label>
-          </div></div>
-        </div>
-        <div id="tplFields"></div>
-        <div class="btn-row" style="margin-top:10px"><button class="btn btn-primary" id="tplSave">Lưu mẫu</button></div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>Mẫu đã lưu</h2>
-      <div id="tplList" class="filelist"></div>
-    </div>
-  </div>
 
     <div id="tab4" class="hidden">
     <div class="card">
@@ -903,20 +853,11 @@ $('#backTo1').onclick=()=>setStep(1);
 $('#toStep3').onclick=()=>{ buildStep3(); setStep(3); };
 $('#backTo2').onclick=()=>{ buildStep2(); setStep(2); };
 
-/* ---- Chọn giao diện ---- */
-(function(){
-  const KEY='dntt_theme'; const pick=$('#themepick'); if(!pick) return;
-  function apply(t){ if(t && t!=='forest') document.body.dataset.theme=t; else document.body.removeAttribute('data-theme');
-    pick.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('sel', s.dataset.theme===(t||'zalopay'))); }
-  let saved='zalopay'; try{ saved=localStorage.getItem(KEY)||'zalopay'; }catch(e){}
-  apply(saved);
-  pick.querySelectorAll('.swatch').forEach(s=>s.onclick=()=>{ const t=s.dataset.theme; apply(t); try{localStorage.setItem(KEY,t);}catch(e){} });
-})();
 
 /* ===================== ĐIỀU HƯỚNG TAB ===================== */
 document.querySelectorAll('.tabbtn').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabbtn').forEach(x=>x.classList.toggle('active', x===b));
-  ['tab1','tab2','tab3','tab4'].forEach(id=>document.getElementById(id).classList.toggle('hidden', b.dataset.tab!==id));
+  ['tab1','tab2','tab4'].forEach(id=>document.getElementById(id).classList.toggle('hidden', b.dataset.tab!==id));
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
@@ -924,7 +865,7 @@ document.querySelectorAll('.tabbtn').forEach(b=>b.onclick=()=>{
 let bbFiles=[];
 function bbFmt(n){ const x=Number(String(n).replace(/\./g,'').replace(/[^\d-]/g,'')); return isNaN(x)?String(n):x.toLocaleString('vi-VN'); }
 function bbParse(lines){
-  const d={meta:{}, raw:{rows:[],total:null}, maxCols:0};
+  const d={meta:{}, raw:{rows:[],total:null}, maxCols:0, isEVN:false, evnNumCols:0};
   let ml=lines.find(l=>/^THÁNG\s+\d+\s+NĂM/i.test(l));
   if(!ml){ const mm=lines.join(' ').match(/Tháng\s+(\d{1,2})\s*\/\s*(\d{4})/i); if(mm) ml='THÁNG '+String(mm[1]).padStart(2,'0')+' NĂM '+mm[2]; }
   d.meta.monthLine=ml||'';
@@ -937,15 +878,41 @@ function bbParse(lines){
   const sln=lines.find(x=>/ĐẠI DIỆN ZION/i.test(x))||''; const si=sln.search(/ĐẠI DIỆN ZION/i);
   d.meta.benA=si>0?sln.slice(0,si).trim():'ĐIỆN LỰC';
   const numTok=s=>/^[\d.]+$/.test(s);
+  const hasLetter=s=>/[A-Za-zÀ-ỹ]/.test(s);
   for(const l of lines){
     const m=l.match(/^(\d+)\s+(\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4})\s+(.+)$/);
     if(m){ const nums=m[3].split(/\s+/).filter(numTok); if(nums.length>=2){ d.raw.rows.push({stt:m[1],date:m[2],nums}); if(nums.length>d.maxCols) d.maxCols=nums.length; } continue; }
-    const t=l.match(/^Tổng\s+(.+)$/i); if(t){ const nums=t[1].split(/\s+/).filter(numTok); if(nums.length>=1) d.raw.total={nums}; }
+    const toks=l.trim().split(/\s+/);
+    if(/^\d+$/.test(toks[0])){
+      let j=toks.length; const nums=[];
+      while(j>1 && numTok(toks[j-1])){ nums.unshift(toks[j-1]); j--; }
+      const name=toks.slice(1,j).join(' ');
+      if(nums.length>=6 && hasLetter(name)){
+        d.isEVN=true; d.raw.rows.push({stt:toks[0],name,nums,evn:true});
+        if(nums.length>d.evnNumCols) d.evnNumCols=nums.length; continue;
+      }
+    }
+    const t=l.match(/^Tổng\s+(.+)$/i);
+    if(t){ const nums=t[1].split(/\s+/).filter(numTok);
+      if(d.isEVN){ if(/^Tổng\s+cộng/i.test(l) && nums.length>=2) d.raw.total={nums}; }
+      else if(nums.length>=1){ d.raw.total={nums}; } }
+  }
+  if(d.isEVN){
+    d.meta.repTitle=(lines.find(l=>/Trưởng\s+[Pp]hòng/i.test(l))||'').trim();
+    const bc=lines.filter(l=>/^\s*Bằng chữ/i.test(l)).map(l=>l.trim());
+    if(d.raw.total && d.evnNumCols===10){
+      const tn=d.raw.total.nums;
+      d.meta.evnSummary=[
+        {label:'Tổng số tiền Zion đã thanh toán:', value:tn[5], words:bc[0]||''},
+        {label:'Tổng số tiền Zion còn phải thanh toán:', value:tn[7], words:bc[1]||''},
+        {label:'Tổng phí dịch vụ Điện lực phải thanh toán cho Zion:', value:tn[9], words:bc[2]||''}
+      ];
+    } else { d.meta.evnSummary=[]; }
   }
   return d;
 }
 function bbPlan(maxCols){
-  if(maxCols>=4) return {slIdx:maxCols-2,tienIdx:maxCols-1,dgPos:'before_tien',phiCalc:true};
+  if(maxCols>=4) return {slIdx:maxCols-2,tienIdx:maxCols-1,dgPos:'before_phi',phiCalc:true};
   if(maxCols===3) return {slIdx:0,tienIdx:1,dgPos:'before_phi',phiCalc:false,phiIdx:2};
   return {slIdx:0,tienIdx:1,dgPos:'before_tien',phiCalc:true};
 }
@@ -956,9 +923,18 @@ function bbDonGiaFor(f){ return (f.dongia!=null && String(f.dongia).trim()!=='')
 let bbActiveTpl=null;
 function bbNormalize(f){
   const dg=bbDonGiaFor(f); const dgNum=Number(String(dg).replace(/\./g,''))||0;
-  const raw=f.parsed.raw; let plan=bbPlan(f.parsed.maxCols);
+  const raw=f.parsed.raw;
+  if(f.parsed.isEVN){
+    const dbr=f.dgByRow||{};
+    const rowDg=stt=>{ const v=dbr[stt]; return (v!=null && String(v).trim()!=='')? v : dg; };
+    return { isEVN:true, meta:f.parsed.meta, vatInc:bbVatInc(), dgFmt:bbFmt(dg), numCols:f.parsed.evnNumCols,
+      rows: raw.rows.filter(r=>r.evn).map(r=>({stt:r.stt,name:r.name,nums:r.nums.map(bbFmt),dg:bbFmt(rowDg(r.stt))})),
+      total: raw.total? {nums: raw.total.nums.map(bbFmt)} : null };
+  }
+  let plan=bbPlan(f.parsed.maxCols);
   if(bbActiveTpl && bbActiveTpl.map) plan=Object.assign({}, plan, bbActiveTpl.map);
-  const calc=sl=>bbFmt((Number(String(sl).replace(/\./g,''))||0)*dgNum);
+  const vatMul=bbVatInc()?1:1.1;
+  const calc=sl=>bbFmt(Math.round((Number(String(sl).replace(/\./g,''))||0)*dgNum*vatMul));
   const mk=nums=>({ sl:bbFmt(nums[plan.slIdx]!=null?nums[plan.slIdx]:'0'), tien:bbFmt(nums[plan.tienIdx]!=null?nums[plan.tienIdx]:'0'),
     phi: plan.phiCalc? calc(nums[plan.slIdx]!=null?nums[plan.slIdx]:'0') : bbFmt(nums[plan.phiIdx]!=null?nums[plan.phiIdx]:'') });
   return { meta:f.parsed.meta, dgPos:plan.dgPos, vatInc:bbVatInc(), dgFmt:bbFmt(dg),
@@ -981,13 +957,84 @@ function bbColumns(n){
   const rows=n.rows.map(rowfn); if(n.total) rows.push(totalfn(n.total));
   return {headers, rows, hasTotal:!!n.total};
 }
+function bbEVNTable(n){
+  const dgH='Đơn giá ('+(n.vatInc?'đã':'chưa')+' gồm VAT)';
+  const phiH='Tổng tiền phí (VNĐ) (đã bao gồm VAT)';
+  const ins=(arr,val)=>{ const a=arr.slice(); a.splice(a.length-1,0,val); return a; };
+  const std=n.numCols===10; let groups=null, subs;
+  if(std){
+    groups=[{label:'STT',span:1,rowspan:2},{label:'Tên điện lực',span:1,rowspan:2},
+      {label:'Số liệu ZION còn phải thanh toán (nợ tháng trước) (1)',span:2},
+      {label:'Số liệu ZION phát sinh trong tháng (2)',span:2},
+      {label:'Số tiền ZION đã thanh toán trong tháng (3)',span:2},
+      {label:'Số liệu ZION còn phải thanh toán cần chuyển sang tháng sau (4)=(1)+(2)-(3)',span:2},
+      {label:'Tổng phí dịch vụ hỗ trợ thu hộ (đã bao gồm VAT) (5)=số lượng hóa đơn*đơn giá*1.1',span:3}];
+    subs=['Số lượng hóa đơn','Số tiền','Số lượng hóa đơn','Số tiền','Số lượng hóa đơn','Số tiền','Số lượng hóa đơn','Số tiền','Số lượng hóa đơn',dgH,phiH];
+  } else {
+    subs=['STT','Tên điện lực']; for(let i=0;i<n.numCols;i++) subs.push('Cột '+(i+1)); subs=ins(subs,dgH);
+  }
+  const body=[]; n.rows.forEach(r=>{ body.push([r.stt,r.name].concat(ins(r.nums, r.dg!=null? r.dg : n.dgFmt))); });
+  let hasTotal=false; if(n.total){ hasTotal=true; body.push(['','Tổng cộng'].concat(ins(n.total.nums,''))); }
+  return {std,groups,subs,body,hasTotal,ncols:2+n.numCols+1};
+}
+async function bbMakePdfEVN(f,n){
+  const { jsPDF }=window.jspdf;
+  const doc=new jsPDF({unit:'mm',format:'a4',orientation:'landscape'});
+  doc.addFileToVFS('VN.ttf',FONT_SANS_B64); doc.addFont('VN.ttf','VN','normal');
+  doc.addFileToVFS('VNB.ttf',FONT_SANS_BOLD_B64); doc.addFont('VNB.ttf','VN','bold');
+  doc.setFont('VN','normal');
+  const m=n.meta;
+  const W=doc.internal.pageSize.getWidth(), M=12; let y=14;
+  const center=(t,b,s)=>{ doc.setFont('VN',b?'bold':'normal'); doc.setFontSize(s); doc.text(t||'',W/2,y,{align:'center'}); y+=s*0.45; };
+  center('CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',true,11);
+  center('Độc lập - Tự do - Hạnh phúc',true,11);
+  center('----------o0o----------',false,11); y+=2;
+  center('BIÊN BẢN XÁC NHẬN DOANH THU & THU PHÍ DỊCH VỤ QUA Zalopay',true,12);
+  if(m.monthLine) center(m.monthLine,true,11);
+  y+=3; doc.setFont('VN','normal'); doc.setFontSize(9.5);
+  const para=t=>{ if(!t) return; const ls=doc.splitTextToSize(t,W-2*M); doc.text(ls,M,y); y+=ls.length*4.4; };
+  para(m.canCu); (m.parties||[]).forEach(para); para(m.homNay); y+=2;
+  const tb=bbEVNTable(n);
+  const head=tb.std
+    ? [ tb.groups.map(g=>({content:g.label,colSpan:g.span,rowSpan:g.rowspan||1,styles:{halign:'center',valign:'middle'}})), tb.subs ]
+    : [ tb.subs ];
+  const colStyles={0:{halign:'center',cellWidth:9},1:{halign:'left',cellWidth:34}};
+  for(let c=2;c<tb.ncols;c++) colStyles[c]={halign:'right'};
+  doc.autoTable({ head, body:tb.body, startY:y, margin:{left:M,right:M},
+    styles:{font:'VN',fontStyle:'normal',fontSize:6.4,cellPadding:0.9,lineColor:[120,120,120],lineWidth:0.1,textColor:[0,0,0],valign:'middle',overflow:'linebreak'},
+    headStyles:{font:'VN',fontStyle:'bold',fillColor:[235,238,242],textColor:[0,0,0],halign:'center',fontSize:6.2},
+    columnStyles:colStyles,
+    didParseCell:h=>{ if(h.section==='body' && tb.hasTotal && h.row.index===tb.body.length-1) h.cell.styles.fontStyle='bold'; } });
+  let fy=doc.lastAutoTable.finalY+8; const H=doc.internal.pageSize.getHeight();
+  const need=h=>{ if(fy+h>H-15){ doc.addPage(); fy=18; } };
+  const sm=m.evnSummary||[];
+  if(sm.length){ doc.setFontSize(9.5);
+    sm.forEach(s=>{ need(12);
+      doc.setFont('VN','normal'); doc.text(s.label||'',M,fy);
+      doc.setFont('VN','bold'); doc.text(String(s.value||''),M+115,fy); fy+=5;
+      if(s.words){ doc.setFont('VN','normal'); const wl=doc.splitTextToSize(s.words,W-2*M-25); doc.text(wl,M+25,fy); fy+=wl.length*4.4; }
+      fy+=1.5; });
+    fy+=3;
+  }
+  doc.setFont('VN','normal'); doc.setFontSize(9.5);
+  if(m.closing){ need(12); const cl=doc.splitTextToSize(m.closing,W-2*M); doc.text(cl,M,fy); fy+=cl.length*4.4; } fy+=10;
+  need(62);
+  const lx=M+45, rx=W-M-45;
+  doc.setFont('VN','bold'); doc.setFontSize(11);
+  doc.text(m.benA||'ĐIỆN LỰC',lx,fy,{align:'center'}); doc.text('ĐẠI DIỆN ZION',rx,fy,{align:'center'});
+  if(m.repTitle){ doc.setFont('VN','normal'); doc.setFontSize(10); doc.text(m.repTitle,rx,fy+5,{align:'center'}); }
+  doc.setFont('VN','bold'); doc.setFontSize(11);
+  if(m.repName) doc.text(m.repName,rx,fy+52,{align:'center'});
+  return doc.output('blob');
+}
 async function bbMakePdf(f){
+  const n=bbNormalize(f); if(n.isEVN) return bbMakePdfEVN(f,n);
   const { jsPDF }=window.jspdf;
   const doc=new jsPDF({unit:'mm',format:'a4'});
   doc.addFileToVFS('VN.ttf',FONT_SANS_B64); doc.addFont('VN.ttf','VN','normal');
   doc.addFileToVFS('VNB.ttf',FONT_SANS_BOLD_B64); doc.addFont('VNB.ttf','VN','bold');
   doc.setFont('VN','normal');
-  const n=bbNormalize(f), m=n.meta;
+  const m=n.meta;
   const W=doc.internal.pageSize.getWidth(), M=15; let y=16;
   const center=(t,b,s)=>{ doc.setFont('VN',b?'bold':'normal'); doc.setFontSize(s); doc.text(t||'',W/2,y,{align:'center'}); y+=s*0.45; };
   center('CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',true,11);
@@ -1012,7 +1059,68 @@ async function bbMakePdf(f){
   if(m.repName) doc.text(m.repName,W-M-30,fy+28,{align:'center'});
   return doc.output('blob');
 }
+async function bbMakeDocxEVN(f,n){
+  const D=window.docx;
+  const { Document,Packer,Paragraph,TextRun,AlignmentType,Table,TableRow,TableCell,WidthType,BorderStyle,VerticalAlign,PageOrientation }=D;
+  const FT='Arial', m=n.meta;
+  const NB={style:BorderStyle.NONE}; const NOB={top:NB,bottom:NB,left:NB,right:NB,insideHorizontal:NB,insideVertical:NB};
+  const run=(t,o={})=>new TextRun({text:String(t==null?'':t),font:FT,size:o.size||20,bold:!!o.bold});
+  const C=AlignmentType.CENTER,R=AlignmentType.RIGHT,L=AlignmentType.LEFT;
+  const P=(t,o={})=>new Paragraph({alignment:o.align||L,spacing:{after:o.after!=null?o.after:40,line:240},children:[run(t,o)]});
+  const tb=bbEVNTable(n);
+  let Wd, aligns;
+  if(tb.std){
+    Wd=[480,1800, 800,1500, 800,1500, 800,1500, 800,1500, 800,1000,1400];
+    aligns=[C,L,R,R,R,R,R,R,R,R,R,R,R];
+  } else {
+    Wd=new Array(tb.ncols).fill(0); Wd[0]=480; Wd[1]=1800;
+    const rem=14680-2280, w=Math.max(700,Math.floor(rem/(tb.ncols-2)));
+    for(let i=2;i<tb.ncols;i++) Wd[i]=w;
+    aligns=Wd.map((_,i)=>i===0?C:(i===1?L:R));
+  }
+  const cell=(t,o={})=>new TableCell(Object.assign({width:{size:o.w,type:WidthType.DXA},verticalAlign:VerticalAlign.CENTER,margins:{top:18,bottom:18,left:40,right:40},
+    children:[new Paragraph({alignment:o.align||L,spacing:{after:0,line:220},children:[run(t,{bold:o.bold,size:o.size||16})]})]},
+    o.rowSpan?{rowSpan:o.rowSpan}:{}, o.colSpan?{columnSpan:o.colSpan}:{}));
+  const rowsArr=[];
+  if(tb.std){
+    const g=tb.groups, gw=[Wd[0],Wd[1],Wd[2]+Wd[3],Wd[4]+Wd[5],Wd[6]+Wd[7],Wd[8]+Wd[9],Wd[10]+Wd[11]+Wd[12]];
+    rowsArr.push(new TableRow({tableHeader:true,children:g.map((gg,i)=>cell(gg.label,{w:gw[i],bold:1,align:C,size:15,rowSpan:gg.rowspan||0,colSpan:gg.span>1?gg.span:0}))}));
+    rowsArr.push(new TableRow({tableHeader:true,children:tb.subs.map((s,i)=>cell(s,{w:Wd[i+2],bold:1,align:C,size:15}))}));
+  } else {
+    rowsArr.push(new TableRow({tableHeader:true,children:tb.subs.map((s,i)=>cell(s,{w:Wd[i],bold:1,align:C,size:15}))}));
+  }
+  tb.body.forEach((rr,ri)=>{ const bold=tb.hasTotal && ri===tb.body.length-1;
+    rowsArr.push(new TableRow({children:rr.map((c,i)=>cell(c,{w:Wd[i],align:aligns[i],bold:bold?1:0}))})); });
+  const table=new Table({width:{size:Wd.reduce((a,b)=>a+b,0),type:WidthType.DXA},rows:rowsArr});
+  const sig=new Table({width:{size:100,type:WidthType.PERCENTAGE},borders:NOB,rows:[new TableRow({children:[
+    new TableCell({width:{size:50,type:WidthType.PERCENTAGE},borders:NOB,children:[new Paragraph({alignment:C,children:[run(m.benA||'ĐIỆN LỰC',{bold:1})]})]}),
+    new TableCell({width:{size:50,type:WidthType.PERCENTAGE},borders:NOB,children:[
+      new Paragraph({alignment:C,children:[run('ĐẠI DIỆN ZION',{bold:1})]})].concat(
+      m.repTitle?[new Paragraph({alignment:C,children:[run(m.repTitle,{size:18})]})]:[]).concat(
+      Array.from({length:8},()=>new Paragraph({children:[run('')]}))).concat([
+      new Paragraph({alignment:C,children:[run(m.repName||'',{bold:1})]})])})]})]});
+  const kids=[
+    P('CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM',{align:C,bold:1,size:22}),
+    P('Độc lập - Tự do - Hạnh phúc',{align:C,bold:1,size:22}),
+    P('----------o0o----------',{align:C,size:20,after:120}),
+    P('BIÊN BẢN XÁC NHẬN DOANH THU & THU PHÍ DỊCH VỤ QUA Zalopay',{align:C,bold:1,size:24}) ];
+  if(m.monthLine) kids.push(P(m.monthLine,{align:C,bold:1,size:22,after:160})); else kids.push(P('',{after:120}));
+  if(m.canCu) kids.push(P(m.canCu,{size:20}));
+  (m.parties||[]).forEach(p=>kids.push(P(p,{size:20})));
+  if(m.homNay) kids.push(P(m.homNay,{size:20,after:120}));
+  kids.push(table, P('',{after:80}));
+  (m.evnSummary||[]).forEach(s=>{
+    kids.push(new Paragraph({spacing:{after:20,line:240},children:[run(s.label+'   ',{size:20}),run(String(s.value||''),{size:20,bold:1})]}));
+    if(s.words) kids.push(new Paragraph({indent:{left:700},spacing:{after:80,line:240},children:[new TextRun({text:s.words,font:FT,size:18,italics:true})]}));
+  });
+  if((m.evnSummary||[]).length) kids.push(P('',{after:40}));
+  if(m.closing) kids.push(P(m.closing,{size:20,after:200}));
+  kids.push(sig);
+  const doc=new Document({sections:[{properties:{page:{size:{orientation:PageOrientation.LANDSCAPE},margin:{top:850,bottom:850,left:850,right:850}}},children:kids}]});
+  return await Packer.toBlob(doc);
+}
 async function bbMakeDocx(f){
+  const n0=bbNormalize(f); if(n0.isEVN) return bbMakeDocxEVN(f,n0);
   const D=window.docx;
   const { Document,Packer,Paragraph,TextRun,AlignmentType,Table,TableRow,TableCell,WidthType,BorderStyle,VerticalAlign }=D;
   const FT='Arial', n=bbNormalize(f), m=n.meta;
@@ -1068,7 +1176,7 @@ async function bbHandleFiles(fl){
   for(const f of arr){
     const key=f.webkitRelativePath||f.name;
     if(bbFiles.some(x=>x.key===key)) continue;
-    const rec={name:f.name,key,status:'reading',bytes:null,parsed:null,dongia:null};
+    const rec={name:f.name,key,status:'reading',bytes:null,parsed:null,dongia:null,dgByRow:{}};
     bbFiles.push(rec); bbRenderList();
     try{ const buf=await f.arrayBuffer(); rec.bytes=new Uint8Array(buf.slice(0));
       const out=await extractDoc(new Uint8Array(buf.slice(0)));
@@ -1102,10 +1210,31 @@ function bbRenderTable(){
   const t=document.getElementById('bbTable'); const ok=bbFiles.filter(f=>f.status==='ok');
   let h='<tr><th>File</th><th>S\u1ed1 d\u00f2ng</th><th>Tổng số tiền</th><th>\u0110\u01a1n gi\u00e1 ri\u00eang (\u0111\u1ec3 tr\u1ed1ng = theo \u00f4 chung)</th></tr>';
   let b='';
-  ok.forEach((f,fi)=>{ b+='<tr><td class="filecol">'+esc(f.name)+'</td><td>'+f.parsed.raw.rows.length+'</td><td>'+(f.parsed.raw.total?bbFmt(bbNormalize(f).total.tien):'-')+'</td>'+
-    '<td><input class="cell" data-fi="'+fi+'" value="'+esc(f.dongia!=null?f.dongia:'')+'" placeholder="(theo \u00f4 chung)"></td></tr>'; });
+  ok.forEach((f,fi)=>{ const nz=bbNormalize(f);
+    const tot = nz.isEVN ? (nz.total?nz.total.nums[nz.total.nums.length-1]:'-') : (f.parsed.raw.total?bbFmt(nz.total.tien):'-');
+    let extra='';
+    if(nz.isEVN){
+      const cnt=Object.keys(f.dgByRow||{}).filter(k=>String(f.dgByRow[k]).trim()!=='').length;
+      extra='<div style="margin-top:6px"><button class="dgtoggle" data-fi="'+fi+'" style="font-size:12px;padding:4px 10px;border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:8px;cursor:pointer">Cài theo điện lực'+(cnt?' ('+cnt+')':'')+'</button></div>';
+    }
+    b+='<tr><td class="filecol">'+esc(f.name)+'</td><td>'+f.parsed.raw.rows.length+'</td><td>'+tot+'</td>'+
+    '<td><input class="cell filedg" data-fi="'+fi+'" value="'+esc(f.dongia!=null?f.dongia:'')+'" placeholder="(theo \u00f4 chung)">'+extra+'</td></tr>';
+    if(nz.isEVN){
+      const def=String(bbDonGiaFor(f)||'').trim(); const ph=def?('(mặc định '+esc(def)+')'):'(theo ô chung)';
+      let rs='';
+      f.parsed.raw.rows.filter(r=>r.evn).forEach(r=>{
+        rs+='<tr><td style="text-align:center;padding:4px 6px">'+esc(r.stt)+'</td><td style="padding:4px 6px">'+esc(r.name)+'</td>'+
+          '<td style="padding:4px 6px"><input class="cell rowdg" data-fi="'+fi+'" data-stt="'+esc(r.stt)+'" value="'+esc((f.dgByRow&&f.dgByRow[r.stt]!=null)?f.dgByRow[r.stt]:'')+'" placeholder="'+ph+'" style="max-width:160px"></td></tr>';
+      });
+      b+='<tr class="dgrow" id="dgrow'+fi+'" style="display:none"><td colspan="4" style="background:#f6f9ff;padding:10px 12px">'+
+        '<div style="font-size:12px;color:var(--muted);margin-bottom:8px">Để trống = theo đơn giá mặc định của file. Gõ số vào điện lực nào thì điện lực đó dùng đơn giá riêng.</div>'+
+        '<table style="width:100%;border-collapse:collapse;font-size:13px"><tr><th style="text-align:center;padding:4px 6px;width:48px">STT</th><th style="text-align:left;padding:4px 6px">Tên điện lực</th><th style="text-align:left;padding:4px 6px;width:180px">Đơn giá riêng</th></tr>'+rs+'</table></td></tr>';
+    }
+  });
   t.innerHTML=h+b;
-  t.querySelectorAll('input.cell').forEach(inp=>inp.oninput=()=>{ ok[+inp.dataset.fi].dongia=inp.value; });
+  t.querySelectorAll('input.filedg').forEach(inp=>inp.oninput=()=>{ ok[+inp.dataset.fi].dongia=inp.value; });
+  t.querySelectorAll('button.dgtoggle').forEach(btn=>btn.onclick=()=>{ const r=document.getElementById('dgrow'+btn.dataset.fi); if(r) r.style.display = (r.style.display==='none'?'':'none'); });
+  t.querySelectorAll('input.rowdg').forEach(inp=>inp.oninput=()=>{ const f=ok[+inp.dataset.fi]; if(!f.dgByRow) f.dgByRow={}; f.dgByRow[inp.dataset.stt]=inp.value; });
 }
 async function bbExport(kind, btn){
   const ok=bbFiles.filter(f=>f.status==='ok'); if(!ok.length) return;
